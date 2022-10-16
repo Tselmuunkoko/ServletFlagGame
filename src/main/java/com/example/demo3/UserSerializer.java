@@ -50,11 +50,4 @@ public class UserSerializer {
     public ArrayList<UserBean> getUserList() {
         return userList;
     }
-    public void deleteFromFile(UserBean u) throws IOException {
-        this.userList.remove(u);
-        ObjectOutputStream outputStream = new ObjectOutputStream(
-                Files.newOutputStream(this.f.toPath()));
-        outputStream.writeObject(this.userList);
-        outputStream.close();
-    }
 }

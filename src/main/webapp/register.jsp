@@ -19,7 +19,6 @@
     <input name="repeat_password" type="password" title="repeat_password" placeholder="repeat_password" required>
     <input type="submit">
 </form>
-<a href="register.jsp">Click here to register</a>
 <%} else {
     response.sendRedirect("dashboard.jsp");
 }%>

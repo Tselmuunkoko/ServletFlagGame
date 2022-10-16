@@ -19,13 +19,17 @@ public class RegisterServlet extends HttpServlet {
             String password = request.getParameter("password");
             String repeatPassword = request.getParameter("repeat_password");
             if (password.equals(repeatPassword)) {
+                if (AuthServlet.isAdmin(username, password)) {
+                    request.setAttribute("message", "The user exists");
+                }
                 UserSerializer serializer = new UserSerializer("user.txt");
                 UserBean userBean = new UserBean(username, password);
                 if (serializer.getUserList().stream().noneMatch(u -> u.getUsername().equals(username))) {
                     serializer.writeToFile(userBean);
                     response.sendRedirect("index.jsp");
                     return;
-                } else {
+                }
+                else {
                     request.setAttribute("message", "The user exists");
                 }
             } else {

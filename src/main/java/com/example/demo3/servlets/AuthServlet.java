@@ -21,11 +21,13 @@ public class AuthServlet extends HttpServlet {
         String name = request.getParameter("username");
         String password = request.getParameter("password");
         UserSerializer serializer = new UserSerializer("user.txt");
-        UserBean u = serializer.readFromFile().stream().filter(userBean ->
-                Objects.equals(userBean.getUsername(), name) && Objects.equals(userBean.getUsername(), password)
+        UserBean u = serializer.getUserList().stream().filter(userBean ->
+                Objects.equals(userBean.getUsername(), name) && Objects.equals(userBean.getPassword(), password)
         ).findFirst().orElse(null);
+        System.out.println(serializer.getUserList());
         HttpSession session = request.getSession();
         if(u!=null) {
+            System.out.println(u.toString());
             synchronized(session) {
                 session.setAttribute("user", u);
             }
